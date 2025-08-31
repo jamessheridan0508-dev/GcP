@@ -1,0 +1,7 @@
+Flask==3.0.3
+Flask-SQLAlchemy==3.0.5
+Flask-Login==0.6.3
+Flask-SocketIO==5.5.1
+eventlet==0.33.3
+Werkzeug==3.0.3
+cloudinary==1.44.1

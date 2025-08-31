@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Créer un compte</title>
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+  .container {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    width: 95%;
+    max-width: 400px;
+  }
+  h2 { text-align: center; color: #333; margin-bottom: 12px; font-size: 1.2rem; }
+  form { display: flex; flex-direction: column; }
+  label { margin-top: 10px; color: #555; font-weight: 500; }
+  input {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #d0d6db;
+    font-size: 1rem;
+  }
+  button {
+    margin-top: 20px;
+    padding: 11px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:hover { background-color: #218838; }
+  .message { margin-top: 10px; text-align: center; font-size: 0.95rem; }
+  a { color: #007bff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  @media (max-width:480px){
+    .container{ padding:16px; border-radius:8px; }
+    input{ padding:12px; font-size:1.05rem; }
+    button{ padding:12px; font-size:1.05rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Créer un compte</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="message" style="color: {% if category == 'error' %}#d32f2f{% else %}#2e7d32{% endif %};">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('register') }}">
+    <label for="password">Mot de passe de compte</label>
+    <input id="password" name="password" type="password" placeholder="Mot de passe du compte" autocomplete="new-password" required>
+
+    <label for="username">Nom d’utilisateur</label>
+    <input id="username" name="username" type="text" placeholder="Votre pseudo" autocomplete="username" required>
+
+    <label for="global_password">Mot de passe global</label>
+    <input id="global_password" name="global_password" type="password" placeholder="Mot de passe global" autocomplete="new-password" required>
+
+    <button type="submit">Créer un compte</button>
+  </form>
+
+  <p style="text-align:center; margin-top:15px; font-size:0.95rem;">
+    Déjà un compte ? <a href="{{ url_for('login') }}">Se connecter</a>
+  </p>
+</div>
+</body>
+</html>
